@@ -18,21 +18,20 @@ function RGB_list = get_chart_values(chart_image)
 
     % istore ang height ug width sa image para loop later
     [rows, cols, ~] = size(chart_image);
-    RGB_list = zeros(24,3);
-
     % kuhaon ang height ug width depende kung pila ka patches ang naa sa image, 6x4 in this case
     patch_width = cols / 6;
     patch_height = rows / 4;
 
     % initialize ang i return, 24 ka patches, 3 colors per patch, all zero for now
     RGB_list = zeros(24,3);
-
+    index = 1;
     % loop through the patches
     for row =  1:4
         for col = 1:6
             % disp("col: " + col + " row: " + row + " at " + round(row*patch_height*((row+row-1)/2/row)) + "," + round(col*patch_width*((col+col-1)/2/col)));
-            % disp(chart_image(round(row*patch_height*((row+row-1)/2/row)): round(row*patch_height*((row+row-1)/2/row)), round(col*patch_width*((col+col-1)/2/col)) : round(col*patch_width*((col+col-1)/2/col)), :));
-            % RGB_list(row*6 + col + 1, :) = avg_color;
+            picked_color = chart_image(round(row*patch_height*((row+row-1)/2/row)): round(row*patch_height*((row+row-1)/2/row)), round(col*patch_width*((col+col-1)/2/col)) : round(col*patch_width*((col+col-1)/2/col)), :);
+            RGB_list(index, :) = picked_color;
+            index = index + 1;
         end
     end
 % DELETE THIS LINE OF CODE
